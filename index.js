@@ -20,7 +20,6 @@ const searchRoute = require("./serverjs/routers/searchRoute")
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 
-console.log("FRONTEND_ORIGIN",process.env.FRONTEND_ORIGIN)
 
 const app = express();
 const server = http.createServer(app);
@@ -32,7 +31,6 @@ const io = new Server(server, {
   },
 });
 
-console.log(process.env.NODE_ENV === "production" )
 
 app.use(helmet());
 app.use(cors({
