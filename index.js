@@ -17,8 +17,10 @@ const setupSocket = require("./serverjs/config/socket");
 const authRoute = require("./serverjs/routers/authRoute");
 const searchRoute = require("./serverjs/routers/searchRoute")
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
+
+console.log("VITE_SOCKET_URL",process.env.VITE_SOCKET_URL)
 
 const app = express();
 const server = http.createServer(app);
