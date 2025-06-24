@@ -32,6 +32,8 @@ const io = new Server(server, {
   },
 });
 
+console.log(process.env.NODE_ENV === "production" )
+
 app.use(helmet());
 app.use(cors({
   origin: process.env.FRONTEND_ORIGIN,
