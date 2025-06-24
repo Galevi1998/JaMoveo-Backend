@@ -20,7 +20,7 @@ const searchRoute = require("./serverjs/routers/searchRoute")
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 
-console.log("VITE_SOCKET_URL",process.env.FRONTEND_ORIGIN)
+console.log("FRONTEND_ORIGIN",process.env.FRONTEND_ORIGIN)
 
 const app = express();
 const server = http.createServer(app);
