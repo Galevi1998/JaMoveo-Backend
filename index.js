@@ -1,13 +1,5 @@
 require("dotenv").config();
 
-console.log("🔍 ENV CHECK:", {
-  MONGO_URI: process.env.MONGO_URI,
-  JWT_SECRET: process.env.JWT_SECRET,
-  REFRESH_SECRET: process.env.REFRESH_SECRET,
-  NODE_ENV: process.env.NODE_ENV,
-});
-
-
 
 const express = require("express");
 const http = require("http");
