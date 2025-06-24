@@ -20,13 +20,13 @@ const searchRoute = require("./serverjs/routers/searchRoute")
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 
-console.log("VITE_SOCKET_URL",process.env.VITE_SOCKET_URL)
+console.log("VITE_SOCKET_URL",process.env.FRONTEND_ORIGIN)
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin:  process.env.VITE_SOCKET_URL,
+    origin:  process.env.FRONTEND_ORIGIN,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -34,7 +34,7 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.VITE_SOCKET_URL,
+  origin: process.env.FRONTEND_ORIGIN,
   credentials: true,
 }));
 app.use(express.json());
