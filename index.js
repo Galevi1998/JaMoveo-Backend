@@ -1,5 +1,13 @@
 require("dotenv").config();
 
+console.log("🔍 ENV CHECK:", {
+  MONGO_URI: process.env.MONGO_URI,
+  JWT_SECRET: process.env.JWT_SECRET,
+  REFRESH_SECRET: process.env.REFRESH_SECRET,
+  NODE_ENV: process.env.NODE_ENV,
+});
+
+
 
 const express = require("express");
 const http = require("http");
@@ -51,6 +59,7 @@ const startServer = async () => {
       console.log(` Server running at ${PORT}`);
     });
   } catch (error) {
+    console.error("❌ Failed to start server:", error);
     process.exit(1);
   }
 };
