@@ -21,7 +21,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: "https://ja-moveo-frontend.vercel.app" ,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,7 +29,7 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: "https://ja-moveo-frontend.vercel.app",
   credentials: true,
 }));
 app.use(express.json());
@@ -47,7 +47,7 @@ const startServer = async () => {
     await connectDB(MONGO_URI);
 
     server.listen(PORT, () => {
-      console.log(` Server running at http://localhost:${PORT}`);
+      console.log(` Server running at ${PORT}`);
     });
   } catch (error) {
     process.exit(1);

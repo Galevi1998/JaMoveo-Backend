@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const User= require('../models/User')
-const bcrypt = require('bcryptjs');
 const cloudinary = require('../config/cloudinary');
 const streamifier = require("streamifier");
 
@@ -57,7 +56,6 @@ exports.register = async (req, res) => {
         const result = await uploadToCloudinaryFromBuffer(picture.data);
         uploadedImageUrl = result.secure_url;
       } catch (uploadErr) {
-        console.error("❌ Cloudinary upload failed:", uploadErr);
         return res.status(500).json({ message: "Image upload failed" });
       }
     }
@@ -101,9 +99,7 @@ exports.register = async (req, res) => {
         },
       });
 
-    console.log("✅ Registered:", newUser.username);
   } catch (error) {
-    console.error("❌ Server error during registration:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -130,12 +126,12 @@ exports.login = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000 // 15 minutes
+            maxAge: 15 * 60 * 1000 
         }).cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+            maxAge: 7 * 24 * 60 * 60 * 1000 
         })
         .status(200)
         .json({
@@ -193,7 +189,6 @@ exports.refreshToken = async (req, res) => {
           message: "Token refreshed",
         });
     } catch (err) {
-      console.error("Refresh error:", err.message);
       return res.status(403).json({ message: "Invalid refresh token" });
     }
   };
