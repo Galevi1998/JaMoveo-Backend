@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 
+
+
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
@@ -22,7 +24,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://ja-moveo-frontend-pm9fy586a-galevi1998s-projects.vercel.app/" ,
+    origin:  process.env.VITE_SOCKET_URL,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -30,7 +32,7 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors({
-  origin: "https://ja-moveo-frontend-pm9fy586a-galevi1998s-projects.vercel.app/",
+  origin: process.env.VITE_SOCKET_URL,
   credentials: true,
 }));
 app.use(express.json());
