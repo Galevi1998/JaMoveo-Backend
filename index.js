@@ -11,8 +11,8 @@ const { Server } = require("socket.io");
 const connectDB = require("./serverjs/db/connect");
 const setupSocket = require("./serverjs/config/socket");
 
-// Routes
 const authRoute = require("./serverjs/routers/authRoute");
+const searchRoute = require("./serverjs/routers/searchRoute")
 
 const PORT = process.env.PORT || 8080;
 const MONGO_URI = process.env.MONGO_URI;
@@ -27,7 +27,6 @@ const io = new Server(server, {
   },
 });
 
-// Middlewares
 app.use(helmet());
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -37,24 +36,20 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
 
-// API Routes
 app.use("/api/auth", authRoute);
+app.use("/api/search", searchRoute)
 
-// Setup WebSocket
 setupSocket(io);
 
 // Start server
 const startServer = async () => {
   try {
-    console.log("🧠 Connecting to MongoDB...");
     await connectDB(MONGO_URI);
-    console.log("✅ MongoDB connected");
 
     server.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
+      console.log(` Server running at http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error("❌ MongoDB connection failed:", error);
     process.exit(1);
   }
 };

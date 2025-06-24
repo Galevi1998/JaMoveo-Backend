@@ -36,7 +36,10 @@ const genrateRfToken = (user) => {
 
 exports.register = async (req, res) => {
   try {
-    const { username, password, instruments } = req.body;
+    const { username, password, instruments , isAdmin } = req.body;
+
+    
+
     const picture = req.files?.picture;
 
     if (!username || !password || !instruments) {
@@ -59,11 +62,15 @@ exports.register = async (req, res) => {
       }
     }
 
+    const status = isAdmin === "true" ? "Admin" : "Player";
+
+
     const newUser = await User.create({
       username,
       password,
       instruments,
       picture: uploadedImageUrl,
+      status,
     });
 
     const token = genrateAccessToken(newUser);
